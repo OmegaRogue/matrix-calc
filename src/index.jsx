@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {App} from './App';
+import { mergeStyles, initializeIcons } from '@fluentui/react';
 import reportWebVitals from './reportWebVitals';
-import { Provider, teamsTheme } from '@fluentui/react-northstar'
+
+initializeIcons();
+
+mergeStyles({
+  ':global(body,html,#root)': {
+    margin: 0,
+    padding: 0,
+    height: '100vh',
+  },
+});
 
 ReactDOM.render(
-  <Provider theme={teamsTheme}>
-    <App />
-  </Provider>,
+      <App />,
   document.getElementById('root')
 );
 
