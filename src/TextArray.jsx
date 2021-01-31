@@ -1,7 +1,7 @@
 import * as math from "mathjs";
 import {Col, Row} from "react-grid-system";
 import React from 'react';
-import {SpinButton, Label} from "@fluentui/react";
+import {Label} from "@fluentui/react";
 
 export const TextArray = (props) => {
   const matrix = math.zeros(props.count)

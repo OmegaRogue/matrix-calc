@@ -1,7 +1,5 @@
-import {Col, Container, Row} from "react-grid-system";
-import {SpinButton, TextField, Label} from "@fluentui/react";
-import * as math from "mathjs";
-import CalcButton from "./CalcButton";
+import {Col, Row} from "react-grid-system";
+import {SpinButton} from "@fluentui/react";
 import React from 'react';
 
 export const Matrix = (props) => {

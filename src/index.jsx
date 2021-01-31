@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
-import { mergeStyles, initializeIcons } from '@fluentui/react';
+import {initializeIcons, mergeStyles} from '@fluentui/react';
 import reportWebVitals from './reportWebVitals';
 
 initializeIcons();

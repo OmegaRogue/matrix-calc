@@ -1,6 +1,6 @@
 import {IconButton} from "@fluentui/react";
 import React from 'react';
-import {Col, Container, Row} from "react-grid-system";
+import {Row} from "react-grid-system";
 import * as math from 'mathjs';
 
 export const CalcButton = (props) => {

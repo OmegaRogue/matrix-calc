@@ -1,22 +1,26 @@
 import React, {useState} from 'react';
 import {
-  Stack, ButtonGrid, SpinButton, ThemeProvider, ButtonGridCell, DefaultButton, mergeStyleSets,
-  FocusZone, List, useConst, Image, MaskedTextField, TextField, PrimaryButton, CommandBar, Panel, ScrollablePane,
-  Sticky, StickyPositionType, Layer, IconButton, Label, Icon, Separator, Text
+  DefaultButton,
+  IconButton,
+  Label,
+  Panel,
+  ScrollablePane,
+  Separator,
+  SpinButton,
+  Stack,
+  Sticky,
+  StickyPositionType,
+  ThemeProvider
 } from '@fluentui/react';
-import logo from './logo.svg'
 import './App.css';
-import {Checkbox} from '@fluentui/react/lib/Checkbox';
 import {DarkTheme} from "@fluentui/theme-samples";
-import GridLayout from 'react-grid-layout';
 
-import {Container, Row, Col} from 'react-grid-system';
+import {Col, Container, Row} from 'react-grid-system';
 import * as math from 'mathjs';
 import {useBoolean} from '@fluentui/react-hooks'
 import {Matrix} from "./Matrix";
 import {TextArray, TextMatrix} from "./TextArray";
 import {CalcButton} from "./CalcButton";
-
 
 function onChangeSize(setState) {
   return (e, n) => {
@@ -64,8 +68,11 @@ export const App = () => {
             headerText="Settings"
         >
           <SpinButton defaultValue={state.rows} label={'Size'} min={1} max={7} styles={{label: {width: '4em'}}}
-                      onChange={onChangeSize(setState)}
-          />
+                      onChange={onChangeSize(setState)}/>
+          <SpinButton defaultValue={state.rows} label={'Size'} min={1} max={7} styles={{label: {width: '4em'}}}
+                      onChange={onChangeSize(setState)}/>
+          <DefaultButton text={"test"}/>
+
         </Panel>
 
         <ScrollablePane>
@@ -75,7 +82,6 @@ export const App = () => {
             </Stack>
           </Sticky>
 
-          {/*<Stack horizontalAlign="center" verticalAlign="center" verticalFill maxHeight='90%'>*/}
           <Container>
             <Row>
               <Col>
@@ -93,23 +99,23 @@ export const App = () => {
                         };
                       });
                     }}/>
-                    <Col><Row nowrap>
-                  <TextArray count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>
-                  <TextArray count={state.rows} render={() => <CalcButton setState={setState}/>}/>
+                  <Col><Row nowrap>
+                    <TextArray count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>
+                    <TextArray count={state.rows} render={() => <CalcButton setState={setState}/>}/>
 
-                  <Matrix value={state.matrix2} onChange={
-                    (x, y, f) => {
-                      setState((currentState) => {
-                        if (isNaN(f)) {
-                          return currentState;
-                        }
-                        return {
-                          ...currentState,
-                          backingMatrix2: currentState.backingMatrix2.subset(math.index(x, y), f),
-                        };
-                      });
-                    }}/></Row>
-                    </Col>
+                    <Matrix value={state.matrix2} onChange={
+                      (x, y, f) => {
+                        setState((currentState) => {
+                          if (isNaN(f)) {
+                            return currentState;
+                          }
+                          return {
+                            ...currentState,
+                            backingMatrix2: currentState.backingMatrix2.subset(math.index(x, y), f),
+                          };
+                        });
+                      }}/></Row>
+                  </Col>
                 </Row>
               </Col>
               <Col>
@@ -121,10 +127,7 @@ export const App = () => {
                   <Stack horizontalAlign={"center"} verticalFill>
                     <Row nowrap>
 
-
-                      {/*<TextArray count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>*/}
-                      {/*<TextMatrix count={state.rows} render={(i) => <Icon iconName='CalculatorEqualTo'/></Label>}/>*/}
-                      <TextMatrix value={state.matrix3} readOnly onRender={(v, x, y) =>
+                      <TextMatrix value={state.matrix3} readOnly onRender={(v, x) =>
                           <>I<sub>{x + 1}</sub> = {v}</>
                       }/>
 
@@ -135,10 +138,9 @@ export const App = () => {
               </Col>
             </Row>
           </Container>
-          {/*</Stack>*/}
+
 
         </ScrollablePane>
-
       </ThemeProvider>
   );
 }
