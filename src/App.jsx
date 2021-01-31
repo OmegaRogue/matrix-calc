@@ -66,7 +66,7 @@ export const App = () => {
             closeButtonAriaLabel="Close"
             headerText="Settings"
         >
-          <SpinButton defaultValue={state.rows} label={'Size'} min={1} max={7} styles={{label: {width: '4em'}}}
+          <SpinButton defaultValue={state.rows} label={'Size'} min={1} max={10} styles={{label: {width: '4em'}}}
                       onChange={onChangeSize(setState)}/>
 
         </Panel>
