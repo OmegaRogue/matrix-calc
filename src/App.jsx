@@ -62,8 +62,10 @@ export const App = () => {
     columns: 3,
     matrix: math.zeros(3, 3),
     matrix2: math.zeros(3, 1),
+    matrix3: math.zeros(3, 1),
     backingMatrix: math.zeros(3, 3),
-    backingMatrix2: math.zeros(3, 1),
+    backingMatrix2: math.zeros(3, 3),
+    backingMatrix3: math.zeros(3, 1),
   });
 
   const [isOpen, {setTrue: openPanel, setFalse: dismissPanel}] = useBoolean(false);
@@ -136,18 +138,7 @@ export const App = () => {
 
                   <TextMatrix count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>
                   {/*<TextMatrix count={state.rows} render={(i) => <Icon iconName='CalculatorEqualTo'/></Label>}/>*/}
-                  <Matrix value={state.matrix2} onChange={
-                    (x, y, f) => {
-                      setState((currentState) => {
-                        if (isNaN(f)) {
-                          return currentState;
-                        }
-                        return {
-                          ...currentState,
-                          backingMatrix2: currentState.backingMatrix2.subset(math.index(x, y), f),
-                        };
-                      });
-                    }}/>
+                  <Matrix value={state.matrix3} readOnly onChange={()=>{}}/>
 
                 </Row>
               </Container>
