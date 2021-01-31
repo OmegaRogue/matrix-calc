@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" version="1.1" viewBox="0 0 52.5 52.5"
+     xmlns="http://www.w3.org/2000/svg">
+ <metadata>
+
+ </metadata>
+ <defs>
+  <symbol id="glyph0-0" overflow="visible" style="overflow:visible">
+   <path d="m2.5 23.516h2.6094v-.54688h-2.0625v-22.812h2.0625v-.5625h-2.6094z"/>
+  </symbol>
+  <symbol id="glyph0-1" overflow="visible" style="overflow:visible">
+   <path d="m2.2188 22.969h-2.0781v.54688h2.625v-23.922h-2.625v.5625h2.0781z"/>
+  </symbol>
+  <symbol id="glyph1-0" overflow="visible" style="overflow:visible">
+   <path d="m3.3281-3.0156c.0625-.25.29688-1.1719.98438-1.1719.046875 0 .29688 0 .5.125-.28125.0625-.46875.29688-.46875.54688 0 .15625.10938.34375.375.34375.21875 0 .53125-.17188.53125-.57812 0-.51562-.57812-.65625-.92188-.65625-.57812 0-.92188.53125-1.0469.75-.25-.65625-.78125-.75-1.0781-.75-1.0312 0-1.6094 1.2812-1.6094 1.5312 0 .10938.10938.10938.125.10938.078125 0 .10938-.03125.125-.10938.34375-1.0625 1-1.3125 1.3438-1.3125.1875 0 .53125.09375.53125.67188 0 .3125-.17188.96875-.53125 2.375-.15625.60938-.51562 1.0312-.95312 1.0312-.0625 0-.28125 0-.5-.125.25-.0625.46875-.26562.46875-.54688 0-.26562-.21875-.34375-.35938-.34375-.3125 0-.54688.25-.54688.57812 0 .45312.48438.65625.92188.65625.67188 0 1.0312-.70312 1.0469-.75.125.35938.48438.75 1.0781.75 1.0312 0 1.5938-1.2812 1.5938-1.5312 0-.10938-.078125-.10938-.10938-.10938-.09375 0-.10938.046875-.14062.10938-.32812 1.0781-1 1.3125-1.3125 1.3125-.39062 0-.54688-.3125-.54688-.65625 0-.21875.046875-.4375.15625-.875z"/>
+  </symbol>
+  <symbol id="glyph2-0" overflow="visible" style="overflow:visible">
+   <path d="m2.3281-4.4375c0-.1875 0-.1875-.20312-.1875-.45312.4375-1.0781.4375-1.3594.4375v.25c.15625 0 .625 0 1-.1875v3.5469c0 .23438 0 .32812-.6875.32812h-.26562v.25c.125 0 .98438-.03125 1.2344-.03125.21875 0 1.0938.03125 1.25.03125v-.25h-.26562c-.70312 0-.70312-.09375-.70312-.32812z"/>
+  </symbol>
+  <symbol id="glyph2-1" overflow="visible" style="overflow:visible">
+   <path d="m3.5156-1.2656h-.23438c-.015625.15625-.09375.5625-.1875.625-.046875.046875-.57812.046875-.6875.046875h-1.2812c.73438-.64062.98438-.84375 1.3906-1.1719.51562-.40625 1-.84375 1-1.5 0-.84375-.73438-1.3594-1.625-1.3594-.85938 0-1.4531.60938-1.4531 1.25 0 .34375.29688.39062.375.39062.15625 0 .35938-.125.35938-.375 0-.125-.046875-.375-.40625-.375.21875-.48438.6875-.64062 1.0156-.64062.70312 0 1.0625.54688 1.0625 1.1094 0 .60938-.4375 1.0781-.65625 1.3281l-1.6719 1.6719c-.078125.0625-.078125.078125-.078125.26562h2.875z"/>
+  </symbol>
+ </defs>
+ <use transform="matrix(1.3812 0 0 1.3795 1.3134 8.709)" x="-1.82188" y="1.1609" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph0-0"/>
+ <g transform="matrix(1.3812 0 0 1.3795 1.3134 8.709)" style="fill:#fff">
+  <use x="3.43398" y="9.1261301" width="100%" height="100%"
+       style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+       xlink:href="#glyph1-0"/>
+  <use x="9.1308603" y="10.61988" width="100%" height="100%"
+       style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+       xlink:href="#glyph2-0"/>
+  <use x="13.099861" y="10.61988" width="100%" height="100%"
+       style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+       xlink:href="#glyph2-0"/>
+ </g>
+ <use transform="matrix(1.3812 0 0 1.3795 1.3134 8.709)" x="3.4340401" y="21.08708" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph1-0"/>
+ <use transform="matrix(1.3812 0 0 1.3795 1.3134 8.709)" x="9.1309204" y="22.58083" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph2-1"/>
+ <use transform="matrix(1.3812 0 0 1.3795 1.3134 8.709)" x="13.099921" y="22.58083" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph2-0"/>
+ <use transform="matrix(1.3812 0 0 1.3795 -11.117 8.709)" x="27.52696" y="9.1261301" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph1-0"/>
+ <use transform="matrix(1.3812 0 0 1.3795 -11.117 8.709)" x="33.223839" y="10.61988" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph2-0"/>
+ <use transform="matrix(1.3812 0 0 1.3795 -11.117 8.709)" x="37.192844" y="10.61988" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph2-1"/>
+ <use transform="matrix(1.3812 0 0 1.3795 -11.117 8.709)" x="27.52702" y="21.08708" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph1-0"/>
+ <use transform="matrix(1.3812 0 0 1.3795 -11.117 8.709)" x="33.2239" y="22.58083" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph2-1"/>
+ <use transform="matrix(1.3812 0 0 1.3795 -11.117 8.709)" x="37.192902" y="22.58083" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph2-1"/>
+ <use transform="matrix(1.3812 0 0 1.3795 -11.117 8.709)" x="41.666088" y="1.16093" width="100%" height="100%"
+      style="fill:#feffff;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:2.9523;stroke:#000000"
+      xlink:href="#glyph0-1"/>
+</svg>
