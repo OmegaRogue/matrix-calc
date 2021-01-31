@@ -1,18 +1,60 @@
 import React, {useState} from 'react';
 import {
   Stack, ButtonGrid, SpinButton, ThemeProvider, ButtonGridCell, DefaultButton, mergeStyleSets,
-  FocusZone, List, useConst, Image, MaskedTextField, TextField, PrimaryButton
+  FocusZone, List, useConst, Image, MaskedTextField, TextField, PrimaryButton, CommandBar, Panel, ScrollablePane,
+  Sticky, StickyPositionType, Layer, IconButton, Label, Icon, Separator, Text
 } from '@fluentui/react';
 import logo from './logo.svg'
 import './App.css';
 import {Checkbox} from '@fluentui/react/lib/Checkbox';
 import {DarkTheme} from "@fluentui/theme-samples";
+import GridLayout from 'react-grid-layout';
 
 import {Container, Row, Col} from 'react-grid-system';
 import * as math from 'mathjs';
+import {useBoolean} from '@fluentui/react-hooks'
+import {Matrix} from "./Matrix";
+import {TextMatrix} from "./TextMatrix";
+import {CalcButton} from "./CalcButton";
 
-const stackTokens = {childrenGap: 15};
 
+function onChangeRows(setState) {
+  return (e, n) => {
+    setState((currentState) => {
+      const i = parseInt(n);
+      if (isNaN(i)) {
+        return currentState;
+      }
+      currentState.matrix.resize([i, currentState.columns]);
+      currentState.matrix2.resize([i, 1]);
+      currentState.backingMatrix.resize([i, currentState.columns]);
+      currentState.backingMatrix2.resize([i, 1]);
+      return {
+        ...currentState,
+        rows: i,
+
+      };
+    });
+  };
+}
+
+function onChangeColumns(setState) {
+  return (e, n) => {
+    setState((currentState) => {
+      const i = parseInt(n);
+      if (isNaN(i)) {
+        return currentState;
+      }
+      currentState.matrix.resize([currentState.rows, i]);
+      currentState.backingMatrix.resize([currentState.rows, i]);
+      return {
+        ...currentState,
+        columns: i,
+
+      };
+    });
+  };
+}
 
 export const App = () => {
   const [state, setState] = useState({
@@ -24,167 +66,99 @@ export const App = () => {
     backingMatrix2: math.zeros(3, 1),
   });
 
+  const [isOpen, {setTrue: openPanel, setFalse: dismissPanel}] = useBoolean(false);
 
   return (
       <ThemeProvider theme={DarkTheme}>
-        <Stack
-            horizontalAlign="center"
-            verticalAlign="center"
-
-            verticalFill={true}
-            styles={{
-              root: {
-                width: '80%',
-                margin: '0 auto',
-              },
-            }}
-            tokens={stackTokens}
+        <Panel
+            isLightDismiss
+            isOpen={isOpen}
+            onDismiss={dismissPanel}
+            closeButtonAriaLabel="Close"
+            headerText="Settings"
         >
-          <Stack
-              horizontalAlign="right">
-            <SpinButton
-                defaultValue="3"
-                label={'Rows'}
-                min={1}
-                max={100}
-                step={1}
-                incrementButtonAriaLabel={'Increase value by 1'}
-                decrementButtonAriaLabel={'Decrease value by 1'}
-                styles={{
-                  label: {
-                    width: '3em'
-                  }
-                }}
-                onChange={(e, n) => {
-                  setState((m) => {
-                    m.matrix.resize([parseInt(n), m.columns]);
-                    m.matrix2.resize([parseInt(n), 1]);
-                    m.backingMatrix.resize([parseInt(n), m.columns]);
-                    m.backingMatrix2.resize([parseInt(n), 1]);
-                    return {
-                      matrix: m.matrix,
-                      rows: parseInt(n),
-                      columns: m.columns,
-                      matrix2: m.matrix2,
-                      backingMatrix: m.backingMatrix,
-                      backingMatrix2: m.backingMatrix2,
-                    };
-                  });
-                }}
-            />
-            <SpinButton
-                defaultValue="3"
-                label={'Columns'}
-                min={1}
-                max={100}
-                step={1}
-                incrementButtonAriaLabel={'Increase value by 1'}
-                decrementButtonAriaLabel={'Decrease value by 1'}
-                styles={{
-                  label: {
-                    width: '4em'
-                  }
-                }}
-                onChange={(e, n) => {
-                  setState((m) => {
-                    m.matrix.resize([m.rows, parseInt(n)]);
-                    m.backingMatrix.resize([m.rows, parseInt(n)]);
-                    return {
-                      matrix: m.matrix,
-                      rows: m.rows,
-                      matrix2: m.matrix2,
-                      columns: parseInt(n),
-                      backingMatrix: m.backingMatrix,
-                      backingMatrix2: m.backingMatrix2,
-                    };
-                  });
-                }}
-            />
-          </Stack>
+          <SpinButton defaultValue={state.rows} label={'Rows'} min={1} max={100} styles={{label: {width: '4em'}}}
+                      onChange={onChangeRows(setState)}
+          />
+          <SpinButton defaultValue={state.columns} label={'Columns'} min={1} max={100}
+                      styles={{label: {width: '4em'}}}
+                      onChange={onChangeColumns(setState)}
+          />
+        </Panel>
 
-          <Row>
-            <Col>
-              {state.matrix.toArray().map((value1, x) =>
-                  <Row>
-                    {value1.map((value, y) =>
-                        <Col>
-                          <TextField defaultValue={value}
-                                     // styles={{wrapper: {width: '4em'}}}
-                                     onChange={(e, n) => {
-                                       setState((m) => {
-                                         m.backingMatrix.subset(math.index(x, y), parseFloat(n))
-                                         return {
-                                           matrix: m.matrix,
-                                           matrix2: m.matrix2,
-                                           rows: m.rows,
-                                           columns: m.columns,
-                                           backingMatrix: m.backingMatrix,
-                                           backingMatrix2: m.backingMatrix2,
-                                         };
-                                       });
-                                     }}/>
-                        </Col>
-                    )}
-                  </Row>
-              )}
-            </Col>
-            <Col/>
-            <Col>
-              {math.ones(state.rows,1).toArray().map((value1, x) =>
-                  <Row>
-                    {value1.map((value, y) =>
-                        <Col>
-                          <TextField defaultValue={value}
-                                     styles={{wrapper: {width: '4em'}}}
-                                     readOnly/>
-                        </Col>
-                    )}
-                  </Row>
-              )}
-            </Col>
-            <Col>
-              {state.matrix2.toArray().map((value1, x) =>
-                  <Row>
-                    {value1.map((value, y) =>
-                        <Col>
-                          <TextField defaultValue={value}
-                                     styles={{wrapper: {width: '4em'}}}
-                                     onChange={(e, n) => {
-                                       setState((m) => {
-                                         m.backingMatrix2.subset(math.index(x, y), parseFloat(n))
-                                         return {
-                                           matrix: m.matrix,
-                                           matrix2: m.matrix2,
-                                           rows: m.rows,
-                                           columns: m.columns,
-                                           backingMatrix: m.backingMatrix,
-                                           backingMatrix2: m.backingMatrix2,
-                                         };
-                                       });
-                                     }}/>
-                        </Col>
-                    )}
-                  </Row>
-              )}
-            </Col>
-          </Row>
-          <hr/>
+        <ScrollablePane>
+          <Sticky stickyPosition={StickyPositionType.Header}>
+            <Stack styles={{root: {padding: "1em default default"}}}>
+              <IconButton iconProps={{iconName: 'Settings'}} text="Open Settings" onClick={openPanel}/>
+            </Stack>
+          </Sticky>
 
-          <PrimaryButton text="Primary" onClick={
-            () => setState(
-                (m) => {
-                  return {
-                    matrix: m.backingMatrix,
-                    matrix2: m.backingMatrix2,
-                    rows: m.rows,
-                    columns: m.columns,
-                    backingMatrix: m.backingMatrix,
-                    backingMatrix2: m.backingMatrix2,
-                  };
-                }
-            )
-          }/>
-        </Stack>
+          {/*<Stack horizontalAlign="center" verticalAlign="center" verticalFill maxHeight='90%'>*/}
+          <Container>
+            <Row>
+            <Col>
+                <Separator styles={{content: {fontSize: '30px'}}}>Equation</Separator>
+                <Row nowrap>
+                  <Matrix value={state.matrix} onChange={
+                    (x, y, f) => {
+                      setState((currentState) => {
+                        if (isNaN(f)) {
+                          return currentState;
+                        }
+                        return {
+                          ...currentState,
+                          backingMatrix: currentState.backingMatrix.subset(math.index(x, y), f),
+                        };
+                      });
+                    }}/>
+                  <TextMatrix count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>
+                  <TextMatrix count={state.rows} render={(i) => <><CalcButton setState={setState}/></>}/>
+
+                  <Matrix value={state.matrix2} onChange={
+                    (x, y, f) => {
+                      setState((currentState) => {
+                        if (isNaN(f)) {
+                          return currentState;
+                        }
+                        return {
+                          ...currentState,
+                          backingMatrix2: currentState.backingMatrix2.subset(math.index(x, y), f),
+                        };
+                      });
+                    }}/>
+                </Row>
+            </Col>
+            <Col>
+
+                <Separator styles={{content: {fontSize: '30px'}}}>Result</Separator>
+              <Container>
+                <Row nowrap align={"center"}>
+
+                  <TextMatrix count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>
+                  {/*<TextMatrix count={state.rows} render={(i) => <Icon iconName='CalculatorEqualTo'/></Label>}/>*/}
+                  <Matrix value={state.matrix2} onChange={
+                    (x, y, f) => {
+                      setState((currentState) => {
+                        if (isNaN(f)) {
+                          return currentState;
+                        }
+                        return {
+                          ...currentState,
+                          backingMatrix2: currentState.backingMatrix2.subset(math.index(x, y), f),
+                        };
+                      });
+                    }}/>
+
+                </Row>
+              </Container>
+            </Col>
+            </Row>
+          </Container>
+          {/*</Stack>*/}
+
+        </ScrollablePane>
+
       </ThemeProvider>
   );
 }
+

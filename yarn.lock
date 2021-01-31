@@ -1158,7 +1158,7 @@
     "@fluentui/set-version" "^8.0.0-beta.1"
     tslib "^1.10.0"
 
-"@fluentui/dom-utilities@^2.0.0-beta.1":
+"@fluentui/dom-utilities@^2.0.0-beta.0", "@fluentui/dom-utilities@^2.0.0-beta.1":
   version "2.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/@fluentui/dom-utilities/-/dom-utilities-2.0.0-beta.1.tgz#7d74bf892cb2a6bb6803a493f8c4da474fbad243"
   integrity sha512-bmEBthwZGyBl5G8zQf5mpVlW2VUlWCcWFwFtg+uWa988wdYEE9KAKxEtX/6K3/1Pj4+mjzFFoMnDAe/+NHnmLg==
@@ -1191,6 +1191,14 @@
   resolved "https://registry.yarnpkg.com/@fluentui/keyboard-key/-/keyboard-key-0.2.13-0.tgz#26a4793a37cc0dbde5e3e8c22a4127d44d4a9524"
   integrity sha512-qZY7oKRBGb4liKG3TfuSOQu/wTw8WdfiO9iU/VawlpJRurjSXeJp3XA4eSZ6is5CKXx4bCTLH/4CTQwBXarrSA==
   dependencies:
+    tslib "^1.10.0"
+
+"@fluentui/merge-styles@^8.0.0-beta.0":
+  version "8.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/merge-styles/-/merge-styles-8.0.0-beta.0.tgz#510fc14ceacc66d7952ba0d2b57c59e6183986c8"
+  integrity sha512-gC9NdlJSQbHv7q0a64YjuFVU7j/pgjE2b7NcI2czWmNASIW3JYPiiCY2FB5G/JqOWK14BcrUKIW5EJQ5ca3MjQ==
+  dependencies:
+    "@fluentui/set-version" "^8.0.0-beta.0"
     tslib "^1.10.0"
 
 "@fluentui/merge-styles@^8.0.0-beta.4":
@@ -1251,6 +1259,16 @@
     "@fluentui/set-version" "^8.0.0-beta.1"
     "@fluentui/style-utilities" "^8.0.0-beta.13"
     "@fluentui/utilities" "^8.0.0-beta.10"
+    tslib "^1.10.0"
+
+"@fluentui/react-hooks@^8.0.0-beta.0":
+  version "8.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/react-hooks/-/react-hooks-8.0.0-beta.0.tgz#b20c992928b8991a3d4aac06f9bb1c14b8f824b6"
+  integrity sha512-CF46bTdVfvR7Qdvx+tY7ut7IkmO2jhJJRrYqQzzP1KembE15GYsLhJ38XZVgQVfYr0Hedc9KBE1Lw6AVREfULw==
+  dependencies:
+    "@fluentui/react-window-provider" "^2.0.0-beta.0"
+    "@fluentui/set-version" "^8.0.0-beta.0"
+    "@fluentui/utilities" "^8.0.0-beta.0"
     tslib "^1.10.0"
 
 "@fluentui/react-hooks@^8.0.0-beta.10":
@@ -1377,7 +1395,7 @@
     "@fluentui/utilities" "^8.0.0-beta.10"
     tslib "^1.10.0"
 
-"@fluentui/react-window-provider@^2.0.0-beta.5":
+"@fluentui/react-window-provider@^2.0.0-beta.0", "@fluentui/react-window-provider@^2.0.0-beta.5":
   version "2.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/@fluentui/react-window-provider/-/react-window-provider-2.0.0-beta.5.tgz#00423dfacce8aaefa4be613d79d02b799c2bb187"
   integrity sha512-fkqIRLtVK0qlXqpWydAfpUp5tSeD2HEKWCoqAaE0CAGUiOilbyuQpZjU8hUPkX3JSWWNE6MvBicbMXnPgGzUGg==
@@ -1457,6 +1475,17 @@
     "@fluentui/merge-styles" "^8.0.0-beta.4"
     "@fluentui/set-version" "^8.0.0-beta.1"
     "@fluentui/utilities" "^8.0.0-beta.10"
+    tslib "^1.10.0"
+
+"@fluentui/utilities@^8.0.0-beta.0":
+  version "8.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/utilities/-/utilities-8.0.0-beta.0.tgz#6db1976d6529c37b104b2272877052c5c70cb461"
+  integrity sha512-mAloFo6ulQOYE4enF49AUOxBKbDaEBcQrEz2BSHZjPz098Wz7LHq3jBUDrz+7kp2tpokf+CCxEWpL7vTQikmXQ==
+  dependencies:
+    "@fluentui/dom-utilities" "^2.0.0-beta.0"
+    "@fluentui/merge-styles" "^8.0.0-beta.0"
+    "@fluentui/set-version" "^8.0.0-beta.0"
+    prop-types "^15.7.2"
     tslib "^1.10.0"
 
 "@fluentui/utilities@^8.0.0-beta.10":
@@ -3510,7 +3539,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.6:
+classnames@2.x, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -7210,6 +7239,11 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
+lodash.isequal@^4.0.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -9084,7 +9118,7 @@ prompts@2.4.0, prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.x, prop-types@^15.0.0, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9290,10 +9324,29 @@ react-dom@<17.0.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-draggable@^4.0.0, react-draggable@^4.0.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.3.tgz#0727f2cae5813e36b0e4962bf11b2f9ef2b406f3"
+  integrity sha512-jV4TE59MBuWm7gb6Ns3Q1mxX8Azffb7oTtDtBgFkxRvhDp38YAARmRplrj0+XGkhOJB5XziArX+4HUUABtyZ0w==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
+
 react-error-overlay@^6.0.8:
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.8.tgz#474ed11d04fc6bda3af643447d85e9127ed6b5de"
   integrity sha512-HvPuUQnLp5H7TouGq3kzBeioJmXms1wHy9EGjz2OURWBp4qZO6AfGEcnxts1D/CbwPLRAgTMPCEgYhA3sEM4vw==
+
+react-grid-layout@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-grid-layout/-/react-grid-layout-1.2.0.tgz#87124d549c86c8df8841666618c8c3e3cb205c26"
+  integrity sha512-fJMGQFguphkAs0NsLNf8hz9cUv9B642JYei2yddiPby/X/kJ4HFIaMUhhqg1ArVfn/vHet1+h+LE4n85cFPh+Q==
+  dependencies:
+    classnames "2.x"
+    lodash.isequal "^4.0.0"
+    prop-types "^15.0.0"
+    react-draggable "^4.0.0"
+    react-resizable "^1.10.0"
 
 react-grid-system@^7.1.1:
   version "7.1.1"
@@ -9316,6 +9369,14 @@ react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
+
+react-resizable@^1.10.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/react-resizable/-/react-resizable-1.11.0.tgz#0b237c4aff16937b7663de1045861749683227ad"
+  integrity sha512-VoGz2ddxUFvildS8r8/29UZJeyiM3QJnlmRZSuXm+FpTqq/eIrMPc796Y9XQLg291n2hFZJtIoP1xC3hSTw/jg==
+  dependencies:
+    prop-types "15.x"
+    react-draggable "^4.0.3"
 
 react-scripts@4.0.1:
   version "4.0.1"
