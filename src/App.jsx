@@ -93,6 +93,7 @@ export const App = () => {
                         };
                       });
                     }}/>
+                    <Col><Row nowrap>
                   <TextArray count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>
                   <TextArray count={state.rows} render={() => <CalcButton setState={setState}/>}/>
 
@@ -107,7 +108,8 @@ export const App = () => {
                           backingMatrix2: currentState.backingMatrix2.subset(math.index(x, y), f),
                         };
                       });
-                    }}/>
+                    }}/></Row>
+                    </Col>
                 </Row>
               </Col>
               <Col>
