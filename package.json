@@ -3,19 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fluentui/react": "^8.0.0-beta.45",
+    "@fluentui/react-hooks": "^8.0.0-beta.0",
+    "@fluentui/theme-samples": "^8.0.0-beta.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "mathjs": "^9.1.0",
+    "react": "<17.0.0",
+    "react-dom": "<17.0.0",
+    "react-grid-layout": "^1.2.0",
+    "react-grid-system": "^7.1.1",
+    "react-pwa-install-prompt": "^1.0.5",
+    "react-pwa-installer-prompt": "^1.0.8",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
