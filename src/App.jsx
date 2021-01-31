@@ -47,12 +47,11 @@ export const App = () => {
   const [state, setState] = useState({
     rows: 3,
     columns: 3,
-    matrix: math.zeros(3, 3),
-    matrix2: math.zeros(3, 1),
+    matrix: math.identity(3, 3),
+    matrix2: math.ones(3, 1),
     matrix3: math.zeros(3, 1),
-    backingMatrix: math.zeros(3, 3),
+    backingMatrix: math.identity(3, 3),
     backingMatrix2: math.zeros(3, 3),
-    backingMatrix3: math.zeros(3, 1),
   });
 
   const [isOpen, {setTrue: openPanel, setFalse: dismissPanel}] = useBoolean(false);
