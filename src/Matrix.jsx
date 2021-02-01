@@ -1,42 +1,53 @@
-import {Col, Row} from "react-grid-system";
-import {SpinButton} from "@fluentui/react";
+import {SpinButton, TextField} from "@fluentui/react";
 import React from 'react';
+import * as math from 'mathjs';
+import Col from "./Col";
+import Row from "./Row";
 
 export const Matrix = (props) => {
+  const matrix = props.defaultValue ?? math.identity(props.size);
+  const workingMatrix = matrix.toArray();
+  return (
+      <Row>
+        {workingMatrix.map((row, x) =>
+            <>
+              {row.map((cell, y) =>
+                  <SpinButton step={0.0001} defaultValue={cell} onChange={(e, n) => {
+                    const f = parseFloat(n);
+                    props.onChange(x, y, f);
+                  }}
+                              iconButtonProps={{iconProps: {iconName: ''}}}
+                              styles={{root: {maxWidth: "3em"}}}/>
+              )}
+            </>
+        )}
+      </Row>);
+};
+
+export const Vector = (props) => {
+  const matrix = props.defaultValue ?? math.zeros(props.size, 1);
+  const workingMatrix = matrix.toArray();
   return (
       <Col>
-        {
-          props.value.toArray().map(
-              (value1, x) =>
-                  <Row nowrap>
-                    {value1.map((value, y) => {
-                          if (props.readOnly) {
-                           return <SpinButton
-                                readOnly
-                                step={0.0001}
-                                value={value}
-                                onChange={(e, n) => {
-                                  const f = parseFloat(n);
-                                  props.onChange(x, y, f);
-                                }}
-                                styles={{root: {width: '1em'}}}/>
-                          } else {
-                           return <SpinButton
-                                readOnly={props.readOnly}
-                                step={0.0001}
-                                defaultValue={value}
-                                onChange={(e, n) => {
-                                  const f = parseFloat(n);
-                                  props.onChange(x, y, f);
-                                }}
-                                styles={{root: {width: '1em'}}}/>
-                          }
-                        }
-                    )
-                    }
-                  </Row>
-          )
-        }
+        {workingMatrix.map((v, i) =>
+            <SpinButton step={0.0001} defaultValue={v} onChange={(e, n) => {
+              console.log(e, n)
+              const f = parseFloat(n);
+              props.onChange(i, f);
+            }} iconButtonProps={{iconProps: {iconName: ''}}}/>
+        )}
       </Col>
   );
-}
+};
+
+export const DisplayVector = (props) => {
+  const matrix = props.defaultValue ?? props.value;
+  const workingMatrix = matrix.toArray();
+  return (
+      <Col>
+        {workingMatrix.map((v, i) =>
+            <TextField readOnly value={v}/>
+        )}
+      </Col>
+  );
+};
