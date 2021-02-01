@@ -4,10 +4,16 @@ import React from 'react';
 import {Label} from "@fluentui/react";
 
 export const TextArray = (props) => {
-  const matrix = math.zeros(props.count)
+  let matrix;
+  if (props.value == null) {
+    matrix = math.zeros(props.size)
+  } else {
+    matrix = props.value
+  }
+  const workingMatrix = matrix.toArray();
   return (
       <Col nowrap fluid>
-        {matrix.toArray().map((_, i) => props.render(i))}
+        {workingMatrix.map((v, i) => props.onRender(v, i))}
       </Col>
   );
 }

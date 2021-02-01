@@ -17,44 +17,72 @@ import {DarkTheme} from "@fluentui/theme-samples";
 import {Col, Container, Row} from 'react-grid-system';
 import * as math from 'mathjs';
 import {useBoolean} from '@fluentui/react-hooks'
-import {Matrix} from "./Matrix";
-import {TextArray, TextMatrix} from "./TextArray";
+import {Matrix, Vector} from "./Matrix";
+import {TextArray, TextMatrix} from "./TextMatrix";
 import {CalcButton} from "./CalcButton";
 
-function onChangeSize(setState) {
-  return (e, n) => {
-    setState((currentState) => {
-      const i = parseInt(n);
-      if (isNaN(i)) {
-        return currentState;
-      }
-      currentState.matrix.resize([i, i]);
-      currentState.matrix2.resize([i, 1]);
-      currentState.matrix3.resize([i, 1]);
-      currentState.backingMatrix.resize([i, i]);
-      currentState.backingMatrix2.resize([i, 1]);
-      return {
-        ...currentState,
-        rows: i,
-        columns: i,
 
-      };
-    });
-  };
-}
+const separatorStyle = {content: {fontSize: '30px'}}
 
 export const App = () => {
   const [state, setState] = useState({
-    rows: 3,
-    columns: 3,
-    matrix: math.identity(3, 3),
-    matrix2: math.ones(3, 1),
-    matrix3: math.zeros(3, 1),
-    backingMatrix: math.identity(3, 3),
-    backingMatrix2: math.zeros(3, 3),
+    size: 3,
+    result: math.identity(3, 1),
+    valueMatrix: math.identity(3, 3),
+    voltMatrix: math.identity(3, 1),
   });
 
   const [isOpen, {setTrue: openPanel, setFalse: dismissPanel}] = useBoolean(false);
+
+  const changeVoltMatrix = (x, y, f) => setState(
+      (currentState) => {
+        if (isNaN(f)) {
+          return currentState;
+        }
+        return {
+          ...currentState,
+          voltMatrix: currentState.voltMatrix.subset(math.index(x, y), f),
+        };
+      });
+  const changeValueMatrix = (x, y, f) => setState(
+      (currentState) => {
+        if (isNaN(f)) {
+          return currentState;
+        }
+        return {
+          ...currentState,
+          valueMatrix: math.subset(currentState.valueMatrix, math.index(x, y), f),
+        };
+      });
+  const changeSize = (e, n) => setState(
+      (currentState) => {
+        const i = parseInt(n);
+        if (isNaN(i)) {
+          return currentState;
+        }
+        return {
+          ...currentState,
+          result: math.resize(currentState.result, [i, 1]),
+          valueMatrix: math.resize(currentState.valueMatrix, [i, i]),
+          voltMatrix: math.resize(currentState.voltMatrix, [i, 1]),
+          size: i,
+
+        };
+      });
+  const doCalc = () => setState(
+      (currentState) => {
+        const inverse = math.inv(currentState.valueMatrix);
+        const result = math.multiply(inverse, currentState.voltMatrix)
+        const size = math.size(result);
+        return {
+          ...currentState,
+          result: math.resize(result, [size[0], 1]),
+        };
+      }
+  );
+  const renderResult = (v, i) => <>I<sub>{i + 1}</sub> = {v}</>;
+  const renderButtons = () => <CalcButton onClick={doCalc}/>;
+  const renderVarVector = (i) => <Label>I<sub>{i + 1}</sub></Label>;
 
   return (
       <ThemeProvider theme={DarkTheme}>
@@ -65,68 +93,38 @@ export const App = () => {
             closeButtonAriaLabel="Close"
             headerText="Settings"
         >
-          <SpinButton defaultValue={state.rows} label={'Size'} min={1} max={10} styles={{label: {width: '4em'}}}
-                      onChange={onChangeSize(setState)}/>
+          <SpinButton defaultValue={state.size} label={'Size'} min={1} max={100} styles={{label: {width: '4em'}}}
+                      onChange={changeSize}/>
 
         </Panel>
-
         <ScrollablePane>
           <Sticky stickyPosition={StickyPositionType.Header}>
             <Stack styles={{root: {padding: "1em default default"}}}>
               <IconButton iconProps={{iconName: 'Settings'}} text="Open Settings" onClick={openPanel}/>
             </Stack>
           </Sticky>
-
           <Container>
             <Row>
               <Col>
-                <Separator styles={{content: {fontSize: '30px'}}}>Equation</Separator>
+                <Separator styles={separatorStyle}>Equation</Separator>
                 <Row>
-                  <Matrix value={state.matrix} onChange={
-                    (x, y, f) => {
-                      setState((currentState) => {
-                        if (isNaN(f)) {
-                          return currentState;
-                        }
-                        return {
-                          ...currentState,
-                          backingMatrix: currentState.backingMatrix.subset(math.index(x, y), f),
-                        };
-                      });
-                    }}/>
-                  <Col><Row nowrap>
-                    <TextArray count={state.rows} render={(i) => <Label>I<sub>{i + 1}</sub></Label>}/>
-                    <TextArray count={state.rows} render={() => <CalcButton setState={setState}/>}/>
+                  <Matrix size={state.size} onChange={changeValueMatrix}/>
+                  <Col>
+                    <Row nowrap>
 
-                    <Matrix value={state.matrix2} onChange={
-                      (x, y, f) => {
-                        setState((currentState) => {
-                          if (isNaN(f)) {
-                            return currentState;
-                          }
-                          return {
-                            ...currentState,
-                            backingMatrix2: currentState.backingMatrix2.subset(math.index(x, y), f),
-                          };
-                        });
-                      }}/></Row>
+                      <TextArray size={state.size} onRender={renderVarVector}/>
+                      <TextArray size={state.size} onRender={renderButtons}/>
+                      <Vector size={state.size} onChange={changeVoltMatrix}/>
+                    </Row>
                   </Col>
                 </Row>
               </Col>
               <Col>
-
-                <Separator
-                    styles={{content: {fontSize: '30px'}}}
-                >Result</Separator>
+                <Separator styles={separatorStyle}>Result</Separator>
                 <Container>
-                  <Stack horizontalAlign={"center"} verticalFill>
+                  <Stack horizontalAlign="center" verticalFill>
                     <Row nowrap>
-
-                      <TextMatrix value={state.matrix3} readOnly onRender={(v, x) =>
-                          <>I<sub>{x + 1}</sub> = {v}</>
-                      }/>
-
-
+                      <TextMatrix value={state.result} onRender={renderResult}/>
                     </Row>
                   </Stack>
                 </Container>
