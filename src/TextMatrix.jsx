@@ -3,6 +3,7 @@ import React from 'react';
 import Col from "./Col";
 import Row from "./Row";
 
+// noinspection JSUnusedGlobalSymbols
 export const TextMatrix = (props) => {
   const matrix = props.value ?? math.identity(props.size);
   const workingMatrix = matrix.toArray();

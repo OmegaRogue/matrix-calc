@@ -71,7 +71,7 @@ export const App = () => {
       (currentState) => {
         const size = currentState.valueMatrix.size();
         const det = math.det(currentState.valueMatrix)
-        if (det == 0) {
+        if (det === 0) {
           console.log("det 0");
           return {...currentState, result: math.zeros(size[0], 1),};
         }
@@ -84,7 +84,7 @@ export const App = () => {
         };
       }
   );
-  const renderResult = (v, i) => <Label>I<sub>{i + 1}</sub> = {v}</Label>;
+  // const renderResult = (v, i) => <Label>I<sub>{i + 1}</sub> = {v}</Label>;
   const renderButtons = () => <CalcButton onClick={doCalc}/>;
   const renderVarVector = (v, i) => <Label>I<sub>{i + 1}</sub></Label>;
 
