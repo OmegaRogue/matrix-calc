@@ -8,8 +8,6 @@ import {
   Separator,
   SpinButton,
   Stack,
-  Sticky,
-  StickyPositionType,
   ThemeProvider
 } from '@fluentui/react';
 import './App.css';
@@ -27,9 +25,9 @@ const separatorStyle = {content: {fontSize: '30px'}}
 export const App = () => {
   const [state, setState] = useState({
     size: 3,
-    result: math.identity(3, 1),
+    result: math.zeros(3, 1),
     valueMatrix: math.identity(3, 3),
-    voltMatrix: math.identity(3, 1),
+    voltMatrix: math.zeros(3, 1),
   });
 
   const [isOpen, {setTrue: openPanel, setFalse: dismissPanel}] = useBoolean(false);
@@ -103,12 +101,14 @@ export const App = () => {
                       onChange={changeSize}/>
 
         </Panel>
+
         <ScrollablePane>
-          <Sticky stickyPosition={StickyPositionType.Header}>
-            <Stack styles={{root: {padding: "1em default default"}}}>
-              <IconButton iconProps={{iconName: 'Settings'}} text="Open Settings" onClick={openPanel}/>
-            </Stack>
-          </Sticky>
+          {/*<Sticky stickyPosition={StickyPositionType.Header}>*/}
+          <Stack styles={{root: {padding: "1em default default"}}}>
+            <IconButton iconProps={{iconName: 'Settings'}} text="Open Settings" onClick={openPanel}/>
+          </Stack>
+          {/*</Sticky>*/}
+
           <div>
             <div style={{
               display: "flex",

@@ -16,6 +16,7 @@ export const Matrix = (props) => {
                     const f = parseFloat(n);
                     props.onChange(x, y, f);
                   }}
+                              iconButtonProps={{iconProps: {iconName: ''}}}
                               styles={{root: {maxWidth: "3em"}}}/>
               )}
             </>
@@ -33,7 +34,7 @@ export const Vector = (props) => {
               console.log(e, n)
               const f = parseFloat(n);
               props.onChange(i, f);
-            }}/>
+            }} iconButtonProps={{iconProps: {iconName: ''}}}/>
         )}
       </Col>
   );
@@ -45,7 +46,7 @@ export const DisplayVector = (props) => {
   return (
       <Col>
         {workingMatrix.map((v, i) =>
-            <TextField value={v}/>
+            <TextField readOnly value={v}/>
         )}
       </Col>
   );
