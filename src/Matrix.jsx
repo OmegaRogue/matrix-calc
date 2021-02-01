@@ -1,72 +1,52 @@
-import {Col, Row} from "react-grid-system";
-import {SpinButton} from "@fluentui/react";
+import {SpinButton, TextField} from "@fluentui/react";
 import React from 'react';
 import * as math from 'mathjs';
+import Col from "./Col";
+import Row from "./Row";
 
 export const Matrix = (props) => {
-  let matrix;
-  if (props.defaultValue == null) {
-    matrix = math.identity(props.size)
-  } else {
-    matrix = props.defaultValue
-  }
+  const matrix = props.defaultValue ?? math.identity(props.size);
   const workingMatrix = matrix.toArray();
   return (
-      <Col>
-        {
-          workingMatrix.map(
-              (row, x) =>
-                  <Row nowrap>
-                    {row.map((cell, y) => {
-                          return <SpinButton
-                              step={0.0001}
-                              defaultValue={cell}
-                              onChange={(e, n) => {
-                                const f = parseFloat(n);
-                                props.onChange(x, y, f);
-                              }}
-                              styles={{root: {width: '1em'}}}/>
-
-                        }
-                    )
-                    }
-                  </Row>
-          )
-        }
-      </Col>
-  );
-}
+      <Row>
+        {workingMatrix.map((row, x) =>
+            <>
+              {row.map((cell, y) =>
+                  <SpinButton step={0.0001} defaultValue={cell} onChange={(e, n) => {
+                    const f = parseFloat(n);
+                    props.onChange(x, y, f);
+                  }}
+                              styles={{root: {maxWidth: "3em"}}}/>
+              )}
+            </>
+        )}
+      </Row>);
+};
 
 export const Vector = (props) => {
-  let matrix;
-  if (props.defaultValue == null) {
-    matrix = math.zeros(props.size, 1)
-  } else {
-    matrix = props.defaultValue
-  }
+  const matrix = props.defaultValue ?? math.zeros(props.size, 1);
   const workingMatrix = matrix.toArray();
   return (
       <Col>
-        {
-          workingMatrix.map(
-              (row, x) =>
-                  <Row nowrap>
-                    {row.map((cell, y) => {
-                          return <SpinButton
-                              step={0.0001}
-                              defaultValue={cell}
-                              onChange={(e, n) => {
-                                const f = parseFloat(n);
-                                props.onChange(x, y, f);
-                              }}
-                              styles={{root: {width: '1em'}}}/>
-
-                        }
-                    )
-                    }
-                  </Row>
-          )
-        }
+        {workingMatrix.map((v, i) =>
+            <SpinButton step={0.0001} defaultValue={v} onChange={(e, n) => {
+              console.log(e, n)
+              const f = parseFloat(n);
+              props.onChange(i, f);
+            }}/>
+        )}
       </Col>
   );
-}
+};
+
+export const DisplayVector = (props) => {
+  const matrix = props.defaultValue ?? props.value;
+  const workingMatrix = matrix.toArray();
+  return (
+      <Col>
+        {workingMatrix.map((v, i) =>
+            <TextField value={v}/>
+        )}
+      </Col>
+  );
+};

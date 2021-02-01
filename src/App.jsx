@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  FontIcon,
   IconButton,
   Label,
   Panel,
@@ -14,11 +15,10 @@ import {
 import './App.css';
 import {DarkTheme} from "@fluentui/theme-samples";
 
-import {Col, Container, Row} from 'react-grid-system';
 import * as math from 'mathjs';
 import {useBoolean} from '@fluentui/react-hooks'
-import {Matrix, Vector} from "./Matrix";
-import {TextArray, TextMatrix} from "./TextMatrix";
+import {DisplayVector, Matrix, Vector} from "./Matrix";
+import {TextVector} from "./TextMatrix";
 import {CalcButton} from "./CalcButton";
 
 
@@ -34,14 +34,14 @@ export const App = () => {
 
   const [isOpen, {setTrue: openPanel, setFalse: dismissPanel}] = useBoolean(false);
 
-  const changeVoltMatrix = (x, y, f) => setState(
+  const changeVoltMatrix = (i, f) => setState(
       (currentState) => {
         if (isNaN(f)) {
           return currentState;
         }
         return {
           ...currentState,
-          voltMatrix: currentState.voltMatrix.subset(math.index(x, y), f),
+          voltMatrix: currentState.voltMatrix.subset(math.index(i, 0), f),
         };
       });
   const changeValueMatrix = (x, y, f) => setState(
@@ -71,18 +71,24 @@ export const App = () => {
       });
   const doCalc = () => setState(
       (currentState) => {
+        const size = currentState.valueMatrix.size();
+        const det = math.det(currentState.valueMatrix)
+        if (det == 0) {
+          console.log("det 0");
+          return {...currentState, result: math.zeros(size[0], 1),};
+        }
         const inverse = math.inv(currentState.valueMatrix);
         const result = math.multiply(inverse, currentState.voltMatrix)
-        const size = math.size(result);
+
         return {
           ...currentState,
           result: math.resize(result, [size[0], 1]),
         };
       }
   );
-  const renderResult = (v, i) => <>I<sub>{i + 1}</sub> = {v}</>;
+  const renderResult = (v, i) => <Label>I<sub>{i + 1}</sub> = {v}</Label>;
   const renderButtons = () => <CalcButton onClick={doCalc}/>;
-  const renderVarVector = (i) => <Label>I<sub>{i + 1}</sub></Label>;
+  const renderVarVector = (v, i) => <Label>I<sub>{i + 1}</sub></Label>;
 
   return (
       <ThemeProvider theme={DarkTheme}>
@@ -103,34 +109,58 @@ export const App = () => {
               <IconButton iconProps={{iconName: 'Settings'}} text="Open Settings" onClick={openPanel}/>
             </Stack>
           </Sticky>
-          <Container>
-            <Row>
-              <Col>
+          <div>
+            <div style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-evenly",
+              alignItems: "stretch",
+            }}>
+              <div>
                 <Separator styles={separatorStyle}>Equation</Separator>
-                <Row>
-                  <Matrix size={state.size} onChange={changeValueMatrix}/>
-                  <Col>
-                    <Row nowrap>
-
-                      <TextArray size={state.size} onRender={renderVarVector}/>
-                      <TextArray size={state.size} onRender={renderButtons}/>
+                <Stack horizontalAlign={"center"}>
+                  <div style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-around",
+                    margin: '0 auto',
+                    width: "90%", gap: "1em",
+                  }}>
+                    <Matrix size={state.size} onChange={changeValueMatrix}/>
+                    <div style={{
+                      display: "grid",
+                      gridTemplateColumns: ".3fr .1fr .2fr .2fr .2fr",
+                    }}>
+                      <div/>
+                      <TextVector size={state.size} onRender={renderVarVector}/>
+                      <TextVector size={state.size} onRender={renderButtons}/>
                       <Vector size={state.size} onChange={changeVoltMatrix}/>
-                    </Row>
-                  </Col>
-                </Row>
-              </Col>
-              <Col>
+                    </div>
+                  </div>
+                </Stack>
+              </div>
+              <div>
                 <Separator styles={separatorStyle}>Result</Separator>
-                <Container>
-                  <Stack horizontalAlign="center" verticalFill>
-                    <Row nowrap>
-                      <TextMatrix value={state.result} onRender={renderResult}/>
-                    </Row>
-                  </Stack>
-                </Container>
-              </Col>
-            </Row>
-          </Container>
+                <Stack horizontalAlign="center" verticalFill>
+                  <div style={{
+                    display: "grid",
+                    gridTemplateColumns: ".3fr .1fr .2fr .2fr .2fr",
+                  }}>
+                    <div/>
+                    <TextVector size={state.size} onRender={renderVarVector}/>
+                    <TextVector size={state.size} onRender={() => <Label style={{
+                      justifyContent: "center",
+                      textAlign: "center",
+                      alignItems: "center",
+                      display: "flex"
+                    }}><FontIcon iconName="CalculatorEqualTo"/></Label>}/>
+                    <DisplayVector value={state.result}/>
+                    {/*<TextVector value={state.result} onRender={renderResult}/>*/}
+                  </div>
+                </Stack>
+              </div>
+            </div>
+          </div>
 
 
         </ScrollablePane>

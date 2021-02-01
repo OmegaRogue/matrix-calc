@@ -1,33 +1,27 @@
 import * as math from "mathjs";
-import {Col, Row} from "react-grid-system";
 import React from 'react';
-import {Label} from "@fluentui/react";
+import Col from "./Col";
+import Row from "./Row";
 
-export const TextArray = (props) => {
-  let matrix;
-  if (props.value == null) {
-    matrix = math.zeros(props.size)
-  } else {
-    matrix = props.value
-  }
+export const TextMatrix = (props) => {
+  const matrix = props.value ?? math.identity(props.size);
   const workingMatrix = matrix.toArray();
   return (
-      <Col nowrap fluid>
-        {workingMatrix.map((v, i) => props.onRender(v, i))}
-      </Col>
+      <Row>
+        {workingMatrix.map(
+            (value1, x) => <>{value1.map((value, y) => <>{props.onRender(value, x, y)}</>)}</>
+        )}
+      </Row>
   );
 }
 
-export const TextMatrix = (props) => {
+export const TextVector = (props) => {
+  const matrix = props.value ?? math.zeros(props.size, 1);
+  const styles = props.styles ?? {wrapper: {}};
+  const workingMatrix = matrix.toArray();
   return (
-      <Col>
-        {props.value.toArray().map(
-            (value1, x) =>
-                <Row nowrap>
-                  {value1.map((value, y) => {
-                    return <Label>{props.onRender(value,x,y)}</Label>
-                  })}
-                </Row>)}
+      <Col style={styles.wrapper}>
+        {workingMatrix.map((v, i) => <>{props.onRender(v, i)}</>)}
       </Col>
   );
 }
